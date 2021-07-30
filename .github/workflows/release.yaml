@@ -11,6 +11,7 @@ on:
 jobs:
   make-release:
     runs-on: ubuntu-latest
+    if: ${{ false }}
     steps:
     - name: Set build variables
       env:
@@ -75,7 +76,7 @@ jobs:
         # 2021-01-02: Uninstall curl as well. We need curl to download the
         # source bundles, but Homebrew's curl has a runtime dependency on
         # gettext. However macOS provides a version of curl that works fine.
-        brew uninstall --ignore-dependencies gettext curl
+        # brew uninstall --ignore-dependencies gettext curl
 
         # Do the build for the requested target.
         make -e ${{ matrix.target }}
