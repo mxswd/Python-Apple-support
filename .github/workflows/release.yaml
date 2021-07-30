@@ -11,7 +11,6 @@ on:
 jobs:
   make-release:
     runs-on: ubuntu-latest
-    if: ${{ false }}
     steps:
     - name: Set build variables
       env:
@@ -47,11 +46,11 @@ jobs:
 
   build:
     runs-on: self-hosted
-    # needs: make-release
+    needs: make-release
     strategy:
       max-parallel: 4
       matrix:
-        target: ['macOS', 'iOS', 'tvOS', 'watchOS']
+        target: ['macOS', 'iOS']
     steps:
     - uses: actions/checkout@v2
     - name: Set build variables
@@ -82,7 +81,6 @@ jobs:
         make -e ${{ matrix.target }}
     - name: Upload ${{ matrix.target }} release asset
       uses: actions/upload-release-asset@v1
-      if: ${{ false }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
