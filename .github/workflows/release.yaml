@@ -5,7 +5,7 @@ name: Build support package
 on:
   push:
     tags:
-    - '*-b*'
+    - '*-m*'
   workflow_dispatch:
 
 jobs:
